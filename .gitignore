@@ -1,0 +1,5 @@
+# data
+**/*.parquet
+
+# notebool checkpoints
+**/*.ipynb_checkpoints/
