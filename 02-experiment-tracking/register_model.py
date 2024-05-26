@@ -12,8 +12,8 @@ from sklearn.metrics import mean_squared_error
 from dotenv import load_dotenv
 load_dotenv()
 
-HPO_EXPERIMENT_NAME = "random-forest-hyperopt"
-EXPERIMENT_NAME = "random-forest-best-models-4"
+HPO_EXPERIMENT_NAME = "random-forest-hyperopt-hw"
+EXPERIMENT_NAME = "random-forest-best-models-hw"
 RF_PARAMS = ['max_depth', 'n_estimators', 'min_samples_split', 'min_samples_leaf', 'random_state']
 
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
