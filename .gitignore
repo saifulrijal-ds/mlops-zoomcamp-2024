@@ -3,3 +3,6 @@
 
 # notebool checkpoints
 **/*.ipynb_checkpoints/
+
+# environment variables
+**/.env
