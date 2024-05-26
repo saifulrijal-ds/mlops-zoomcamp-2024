@@ -2,19 +2,23 @@ import os
 import pickle
 import click
 import mlflow
+import mlflow.sklearn
 
 from mlflow.entities import ViewType
 from mlflow.tracking import MlflowClient
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 
+from dotenv import load_dotenv
+load_dotenv()
+
 HPO_EXPERIMENT_NAME = "random-forest-hyperopt"
-EXPERIMENT_NAME = "random-forest-best-models"
+EXPERIMENT_NAME = "random-forest-best-models-4"
 RF_PARAMS = ['max_depth', 'n_estimators', 'min_samples_split', 'min_samples_leaf', 'random_state']
 
 mlflow.set_tracking_uri("http://127.0.0.1:5000")
 mlflow.set_experiment(EXPERIMENT_NAME)
-mlflow.sklearn.autolog()
+# mlflow.sklearn.autolog()
 
 
 def load_pickle(filename):
@@ -26,8 +30,8 @@ def train_and_log_model(data_path, params):
     X_train, y_train = load_pickle(os.path.join(data_path, "train.pkl"))
     X_val, y_val = load_pickle(os.path.join(data_path, "val.pkl"))
     X_test, y_test = load_pickle(os.path.join(data_path, "test.pkl"))
-
-    with mlflow.start_run():
+    mlflow.sklearn.autolog()
+    with mlflow.start_run() as run:
         for param in RF_PARAMS:
             params[param] = int(params[param])
 
@@ -70,9 +74,15 @@ def run_register_model(data_path: str, top_n: int):
 
     # Select the model with the lowest test RMSE
     experiment = client.get_experiment_by_name(EXPERIMENT_NAME)
-    # best_run = client.search_runs( ...  )[0]
+    best_run = client.search_runs(
+        experiment_ids=experiment.experiment_id,
+        run_view_type=ViewType.ACTIVE_ONLY,
+        max_results=1,
+        order_by=["metrics.test_rmse ASC"]
+    )[0]
 
     # Register the best model
+    mlflow.register_model(model_uri=f"runs:/{best_run.info.run_id}/model", name="random-forest-best-model")
     # mlflow.register_model( ... )
 
 
