@@ -1,17 +1,23 @@
 services:
   magic:
-    image: mageai/mageai:latest
-    command: mage start ${PROJECT_NAME}
     env_file:
       - .env
     build:
       context: .
       dockerfile: Dockerfile
     environment:
+      MAGE_DATABASE_CONNETION_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}
       USER_CODE_PATH: /home/src/${PROJECT_NAME}
       ENV: ${ENV}
     ports:
       - 6789:6789
     volumes:
       - .:/home/src/
+      - ./mage_data:/home/src/mage_data
     restart: on-failure:5
+    networks:
+      - mlops_network
+
+networks:
+  mlops_network:
+    external: true

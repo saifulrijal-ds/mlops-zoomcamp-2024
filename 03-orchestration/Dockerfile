@@ -1,4 +1,4 @@
-FROM mageai/mageai:latest
+FROM mageai/mageai:alpha
 
 ARG USER_CODE_PATH=/home/src/${PROJECT_NAME}
 
@@ -7,3 +7,13 @@ ARG USER_CODE_PATH=/home/src/${PROJECT_NAME}
 COPY requirements.txt ${USER_CODE_PATH}/requirements.txt 
 
 RUN pip3 install -r ${USER_CODE_PATH}/requirements.txt
+
+# Copy the startup script
+COPY start-mage.sh /app/start-mage.sh
+
+# Ensure the startup scripts is executable
+RUN chmod +x /app/start-mage.sh
+
+# CMD ["/bin/sh", "-c", "/app/run_app.sh"]
+# Set the default entrypoint command
+ENTRYPOINT [ "/bin/sh", "-c", "/app/start-mage.sh" ]
