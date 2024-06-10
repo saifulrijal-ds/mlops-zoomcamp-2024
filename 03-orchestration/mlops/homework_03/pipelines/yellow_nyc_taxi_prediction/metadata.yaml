@@ -1,0 +1,100 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: homework_03/data_loaders/ingest.py
+  downstream_blocks:
+  - prepare
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: ingest
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: ingest
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: homework_03/transformers/prepare.py
+  downstream_blocks:
+  - train
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: prepare
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - ingest
+  uuid: prepare
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_path: homework_03/transformers/train.py
+    file_source:
+      path: homework_03/transformers/train.py
+  downstream_blocks:
+  - save_artifact
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: train
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - prepare
+  uuid: train
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    file_source:
+      path: homework_03/data_exporters/save_artifact.py
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: save_artifact
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - train
+  uuid: save_artifact
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-06-10 05:42:00.925148+00:00'
+data_integration: null
+description: Yellow NYC taxi duration prediction
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: yellow_nyc_taxi_prediction
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+uuid: yellow_nyc_taxi_prediction
+variables_dir: /home/src/mage_data/homework_03
+widgets: []
