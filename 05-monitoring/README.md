@@ -85,9 +85,9 @@ prediction_drift = result['metrics'][0]['result']['drift_score']
     fare_amount_missing_values = result['metrics'][3]['result']['current']['number_of_missing_values']
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/8838976b-3f69-4ca1-bc9c-e1e9cbd08aa6/de6e722f-c44e-4845-95e0-b2e55d05ade3/Untitled.png)
+![adminer](images/adminer.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/8838976b-3f69-4ca1-bc9c-e1e9cbd08aa6/6724a405-bb76-409f-81d8-58307f6cb7fe/Untitled.png)
+![Untitled](images/dashboard.png)
 
 ## Q4. Dashboard
 
