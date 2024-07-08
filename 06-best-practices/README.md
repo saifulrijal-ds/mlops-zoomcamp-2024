@@ -421,7 +421,9 @@ What's the sum of predicted durations for the test dataframe?
 - 69.28
 - 81.08
 
-![Untitled1](images/s3_localstack_batch.png)
+![Untitled1](images/s3_localstack_batch.png)t
+
+The updated [batch.py](https://github.com/saifulrijal-ds/mlops-zoomcamp-2024/blob/main/06-best-practices/homework/batch.py) and [integration_test.py](https://github.com/saifulrijal-ds/mlops-zoomcamp-2024/blob/main/06-best-practices/homework/integration_test.py)
 
 ## Running the test (ungraded)
 
